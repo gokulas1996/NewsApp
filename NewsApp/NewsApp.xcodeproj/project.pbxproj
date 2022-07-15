@@ -15,6 +15,7 @@
 		DB81F4F128817DAF0087426A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB81F4EF28817DAF0087426A /* LaunchScreen.storyboard */; };
 		DB81F4F928817F210087426A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB81F4F828817F210087426A /* NetworkManager.swift */; };
 		DB81F4FB288189170087426A /* NewsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB81F4FA288189170087426A /* NewsData.swift */; };
+		DBE73E6C288194EA00CFE189 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE73E6B288194EA00CFE189 /* NewsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		DB81F4F228817DAF0087426A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB81F4F828817F210087426A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		DB81F4FA288189170087426A /* NewsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsData.swift; sourceTree = "<group>"; };
+		DBE73E6B288194EA00CFE189 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				DB81F4F228817DAF0087426A /* Info.plist */,
 				DB81F4F828817F210087426A /* NetworkManager.swift */,
 				DB81F4FA288189170087426A /* NewsData.swift */,
+				DBE73E6B288194EA00CFE189 /* NewsTableViewCell.swift */,
 			);
 			path = NewsApp;
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 			files = (
 				DB81F4F928817F210087426A /* NetworkManager.swift in Sources */,
 				DB81F4E928817DAE0087426A /* ViewController.swift in Sources */,
+				DBE73E6C288194EA00CFE189 /* NewsTableViewCell.swift in Sources */,
 				DB81F4E528817DAE0087426A /* AppDelegate.swift in Sources */,
 				DB81F4E728817DAE0087426A /* SceneDelegate.swift in Sources */,
 				DB81F4FB288189170087426A /* NewsData.swift in Sources */,
