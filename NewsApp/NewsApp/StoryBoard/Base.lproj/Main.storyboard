@@ -27,8 +27,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="283"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="mTP-Wp-8hq">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="mTP-Wp-8hq">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="206.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="206.5" id="ojo-rg-LnT"/>
+                                                    </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Fsb-Gs-AEC">
                                                     <rect key="frame" x="16" y="206.5" width="343" height="65.5"/>

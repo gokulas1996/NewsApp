@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var networkManagerObj = NetworkManager.networkManager
+    var networkManagerObj = NetworkManager.shared
     var newsData: NewsData?
     let refreshControl = UIRefreshControl()
     
@@ -18,15 +18,21 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
-        self.tableView.addSubview(refreshControl)
+        self.addRefershControl()
         self.activityController(startRunning: true)
         self.fetchData {
             self.activityController(startRunning: false)
         }
     }
     
+    // Function to add pull to refresh functionality
+    func addRefershControl() {
+        self.refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        self.tableView.addSubview(refreshControl)
+    }
     
+    
+    //Function to call fetch data function from network manager class and handle the data
     func fetchData(completion: @escaping () -> ()) {
         self.networkManagerObj.fetchData { data, status, error in
             if let data = data {
@@ -43,14 +49,14 @@ class ViewController: UIViewController {
         }
     }
     
+    // Funtion for pull to refresh
     @objc func refresh(_ sender: AnyObject) {
-        self.activityController(startRunning: true)
         self.fetchData {
-            self.activityController(startRunning: false)
             self.refreshControl.endRefreshing()
         }
     }
     
+    // Funtion to control activity controller
     func activityController(startRunning: Bool) {
         self.activityIndicator.isHidden = startRunning == true ? false : true
         self.view.alpha = startRunning == true ? 0.5 : 1.0
@@ -59,6 +65,8 @@ class ViewController: UIViewController {
     }
 }
 
+
+// MARK: UITableView Functions
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,27 +74,36 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! NewsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellId) as! NewsTableViewCell
+        cell.selectionStyle = .none
         cell.titleLabel.text = self.newsData?.articles?[indexPath.row].title
         cell.descriptionLabel.text = self.newsData?.articles?[indexPath.row].description
         cell.authorLabel.text = self.newsData?.articles?[indexPath.row].author
         if let imageURL = self.newsData?.articles?[indexPath.row].urlToImage {
-            cell.newsImageView.imageFromServerURL(urlString: imageURL, PlaceHolderImage: UIImage(named: "PlaceholderImage")!)
+            // call function to fetch image from image url
+            cell.newsImageView.imageFromServerURL(urlString: imageURL, PlaceHolderImage: UIImage(named: Constants.placeholderImage)!)
         }
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let urlString = self.newsData?.articles?[indexPath.row].url, let url = URL(string: urlString) {
+            // opens news url
+            UIApplication.shared.open(url)
+        }
+    }
 }
 
+// MARK: UIIMageView Fetch function
 extension UIImageView {
-    
     public func imageFromServerURL(urlString: String, PlaceHolderImage:UIImage) {
         if self.image == nil{
               self.image = PlaceHolderImage
         }
         URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL, completionHandler: { (data, response, error) -> Void in
-            if error != nil {
-                print(error ?? "No Error")
+            if let error = error {
+                print(error)
                 return
             }
             DispatchQueue.main.async(execute: { () -> Void in
@@ -94,4 +111,5 @@ extension UIImageView {
                 self.image = image
             })
         }).resume()
-    }}
+    }
+}

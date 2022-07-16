@@ -14,12 +14,13 @@ enum Status {
 
 class NetworkManager: NSObject {
     
-    static let networkManager = NetworkManager()
+    static let shared = NetworkManager()
     
     private override init() {}
     
+    // Network manager function to fetch data from url
     func fetchData(completionHandler : @escaping (_ data: NewsData?, _ status: Status?, _ error: Error?) -> Void) {
-        guard let url = URL(string:"https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=5c282f975e454fc799a32d94782da93e") else{ return }
+        guard let url = URL(string:"\(Constants.url)\(Constants.apiKey)") else{ return }
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let data = data {
